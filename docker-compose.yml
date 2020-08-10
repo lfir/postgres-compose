@@ -1,7 +1,7 @@
 version: '3.1'
 
 services:
-  pg11:
+  pgdb:
     build: .
     restart: always
     env_file:
@@ -12,12 +12,14 @@ services:
         - pgdata:/var/lib/postgresql/data
 
   pgadmin4:
-    image: thajeztah/pgadmin4
+    image: dpage/pgadmin4:latest 
     restart: always
+    env_file:
+      - ./pgadmin.env
     ports:
-        - '5050:5050'
+        - '5050:80'
     volumes:
-        - pgadmin:/pgadmin
+        - pgadmin:/var/lib/pgadmin
 
 volumes:
     pgdata:
